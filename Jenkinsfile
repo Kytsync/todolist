@@ -4,7 +4,6 @@ pipeline {
         REGISTRY = 'localhost:5000'
         IMAGE_NAME = 'spring-boot-app:latest'
         // Add any additional paths you might need
-        PATH+EXTRA = '/usr/local/bin'
     }
     stages {
         stage('Build') {
