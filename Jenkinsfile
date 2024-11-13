@@ -3,11 +3,13 @@ pipeline {
     environment {
         REGISTRY = 'localhost:5000'
         IMAGE_NAME = 'spring-boot-app:latest'
+        // Add any additional paths you might need
+        PATH+EXTRA = '/usr/local/bin'
     }
     stages {
         stage('Build') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                    set -e
                    mvn clean package -DskipTests
                 '''
@@ -15,7 +17,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                    set -e
                    docker build -t $IMAGE_NAME .
                 '''
@@ -23,7 +25,7 @@ pipeline {
         }
         stage('Docker Push to Minikube') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                    set -e
                    eval $(minikube docker-env)
                    docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
@@ -33,7 +35,7 @@ pipeline {
         }
         stage('Deploy to Kubernetes') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                    set -e
                    kubectl apply -f deployment.yaml
                    kubectl apply -f service.yaml
