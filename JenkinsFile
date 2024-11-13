@@ -3,7 +3,7 @@ pipeline {
     environment {
         REGISTRY = 'localhost:5000'
         IMAGE_NAME = 'spring-boot-app:latest'
-        // Optional: Use Docker registry if needed
+        // Optional: Use Docker registry if needed dfdfdf
     }
     stages {
         stage('Build') {
